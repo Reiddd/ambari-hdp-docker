@@ -5,6 +5,7 @@ LABEL version="0.1"
 # Setup repos and install pre-requisites
 RUN apt-get -qq update
 RUN apt-get update && apt-get install wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
+RUN add-apt-repository ppa:webupd8team/java && apt-get update && apt-get install oracle-java8-installer && apt-get install oracle-java8-set-default
 
 # Add HDP and Ambari repos
 RUN wget -O /etc/apt/sources.list.d/ambari.list http://public-repo-1.hortonworks.com/ambari/ubuntu16/2.x/updates/2.6.0.0/ambari.list
