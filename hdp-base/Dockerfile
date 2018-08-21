@@ -24,10 +24,6 @@ ADD config/sshd_config /etc/ssh/sshd_config
 RUN touch /root/.ssh/authorized_keys \
     && cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys \
     && chmod -R 600 /root/.ssh/
-    
-# 'nproc' returns 4
-RUN cat /etc/ambari-server/conf/ambari.properties | grep -v client.threadpool.size.max > /etc/ambari-server/conf/ambari.properties
-RUN echo 'client.threadpool.size.max=25' >> /etc/ambari-server/conf/ambari.properties
 
 # shutdown ipv6
 RUN echo 'net.ipv6.conf.all.disable_ipv6=1' >> /etc/sysctl.conf
