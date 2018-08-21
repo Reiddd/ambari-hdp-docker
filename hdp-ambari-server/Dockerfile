@@ -1,4 +1,4 @@
-FROM amarmesic/hdp-base:latest
+FROM reidddd/hdp-base:latest
 LABEL author="Amar Mesic"
 LABEL version="0.1"
 
