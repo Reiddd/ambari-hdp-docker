@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 LABEL author="Amar Mesic"
 LABEL version="0.1"
 
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/source.list
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 # Setup repos and install pre-requisites
 RUN apt-get update && apt-get install software-properties-common apt-utils wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
