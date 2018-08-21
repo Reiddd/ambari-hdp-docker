@@ -3,7 +3,7 @@ LABEL author="Amar Mesic"
 LABEL version="0.1"
 
 # Setup repos and install pre-requisites
-RUN apt-get update && apt-get install wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
+RUN apt-get update && apt-get install software-properties-common apt-utils wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
 RUN add-apt-repository ppa:webupd8team/java && apt-get update && apt-get install oracle-java8-installer && apt-get install oracle-java8-set-default
 
 # Add HDP and Ambari repos
@@ -22,11 +22,7 @@ ADD config/sshd_config /etc/ssh/sshd_config
 RUN touch /root/.ssh/authorized_keys \
     && cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys \
     && chmod -R 600 /root/.ssh/
-
-# Set up hosts
-ADD config/hosts /etc/
-CMD ["/bin/bash"]
-
+    
 # 'nproc' returns 4
 RUN cat /etc/ambari-server/conf/ambari.properties | grep -v client.threadpool.size.max > /etc/ambari-server/conf/ambari.properties
 RUN echo 'client.threadpool.size.max=25' >> /etc/ambari-server/conf/ambari.properties
@@ -35,3 +31,7 @@ RUN echo 'client.threadpool.size.max=25' >> /etc/ambari-server/conf/ambari.prope
 RUN echo 'net.ipv6.conf.all.disable_ipv6=1' >> /etc/sysctl.conf
 RUN echo 'net.ipv6.conf.default.disable_ipv6=1' >> /etc/sysctl.conf
 RUN sysctl -p
+
+# Set up hosts
+ADD config/hosts /etc/
+CMD ["/bin/bash"]
