@@ -7,7 +7,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 # Setup repos and install pre-requisites
 RUN apt-get update && apt-get install software-properties-common apt-utils wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
-RUN add-apt-repository ppa:webupd8team/java && apt-get update && apt-get install oracle-java8-installer oracle-java8-set-default -y
+RUN add-apt-repository ppa:webupd8team/java && apt-get update
+RUN apt-get install oracle-java8-installer oracle-java8-set-default -y
 
 # Add HDP and Ambari repos
 RUN wget -O /etc/apt/sources.list.d/ambari.list http://public-repo-1.hortonworks.com/ambari/ubuntu16/2.x/updates/2.6.0.0/ambari.list
