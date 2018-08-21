@@ -26,3 +26,7 @@ RUN touch /root/.ssh/authorized_keys \
 # Set up hosts
 ADD config/hosts /etc/
 CMD ["/bin/bash"]
+
+# 'nproc' returns 4
+RUN cat /etc/ambari-server/conf/ambari.properties | grep -v client.threadpool.size.max > /etc/ambari-server/conf/ambari.properties
+RUN echo 'client.threadpool.size.max=4' >> /etc/ambari-server/conf/ambari.properties
