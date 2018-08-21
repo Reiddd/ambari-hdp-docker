@@ -29,4 +29,9 @@ CMD ["/bin/bash"]
 
 # 'nproc' returns 4
 RUN cat /etc/ambari-server/conf/ambari.properties | grep -v client.threadpool.size.max > /etc/ambari-server/conf/ambari.properties
-RUN echo 'client.threadpool.size.max=4' >> /etc/ambari-server/conf/ambari.properties
+RUN echo 'client.threadpool.size.max=25' >> /etc/ambari-server/conf/ambari.properties
+
+# shutdown ipv6
+RUN echo 'net.ipv6.conf.all.disable_ipv6=1' >> /etc/sysctl.conf
+RUN echo 'net.ipv6.conf.default.disable_ipv6=1' >> /etc/sysctl.conf
+RUN sysctl -p
