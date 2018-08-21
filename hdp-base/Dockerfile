@@ -7,7 +7,7 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 # Setup repos and install pre-requisites
 RUN apt-get update && apt-get install software-properties-common apt-utils wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
-RUN add-apt-repository ppa:webupd8team/java && apt-get update && apt-get install oracle-java8-installer && apt-get install oracle-java8-set-default
+RUN add-apt-repository ppa:webupd8team/java && apt-get update && apt-get install oracle-java8-installer oracle-java8-set-default -y
 
 # Add HDP and Ambari repos
 RUN wget -O /etc/apt/sources.list.d/ambari.list http://public-repo-1.hortonworks.com/ambari/ubuntu16/2.x/updates/2.6.0.0/ambari.list
@@ -33,7 +33,6 @@ RUN echo 'client.threadpool.size.max=25' >> /etc/ambari-server/conf/ambari.prope
 # shutdown ipv6
 RUN echo 'net.ipv6.conf.all.disable_ipv6=1' >> /etc/sysctl.conf
 RUN echo 'net.ipv6.conf.default.disable_ipv6=1' >> /etc/sysctl.conf
-RUN sysctl -p
 
 # Set up hosts
 ADD config/hosts /etc/
